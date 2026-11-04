@@ -1,0 +1,862 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fa5d61">
+
+<title>AURA LUCK - WinGo</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+
+<style>
+/* =========================================
+   AURA LUCK - GIAO DIỆN MỨC CƯỢC MỚI
+========================================= */
+
+.aura-coin {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+  vertical-align: middle;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.aura-coin.small {
+  width: 16px;
+  height: 16px;
+}
+
+.aura-coin.large {
+  width: 28px;
+  height: 28px;
+}
+
+.aura-money {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.aura-balance-card {
+  background: linear-gradient(120deg, #fff8df, #fff0b5);
+  border: 1px solid #f4d87b;
+  border-radius: 14px;
+  padding: 15px;
+  margin: 16px 0 18px;
+}
+
+.aura-balance-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8c671c;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.aura-balance-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a46b0c;
+  font-size: 23px;
+  font-weight: 900;
+}
+
+.aura-balance-note {
+  margin-top: 7px;
+  font-size: 11px;
+  color: #967f48;
+}
+
+.aura-level-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 18px 0 12px;
+  color: #34394b;
+}
+
+.amount-options {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+.amount-options button {
+  min-width: 0;
+  min-height: 65px;
+  border-radius: 11px !important;
+  padding: 9px 3px !important;
+  background: #f3f4fa;
+  color: #33394c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 12px !important;
+  font-weight: 700;
+  transition: transform .12s, background .12s;
+}
+
+.amount-options button:active {
+  transform: scale(.95);
+}
+
+.amount-options button.active {
+  background: #fa5d61 !important;
+  color: white !important;
+}
+
+.amount-options button .aura-coin {
+  width: 22px;
+  height: 22px;
+}
+
+.aura-amount-control {
+  margin-top: 15px;
+}
+
+.aura-amount-control > label {
+  margin-bottom: 9px;
+  font-weight: 600;
+}
+
+.aura-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #dedfe6;
+  background: white;
+  border-radius: 11px;
+  padding: 5px 12px;
+}
+
+.aura-input-row:focus-within {
+  border-color: #fa5d61;
+}
+
+#betAmount {
+  flex: 1;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 12px 2px !important;
+  border: none !important;
+  outline: none;
+  background: transparent;
+  font-size: 19px;
+  font-weight: 700;
+  color: #34394b;
+}
+
+.aura-input-unit {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #8e94a3;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.aura-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.aura-actions span {
+  font-size: 12px;
+  color: #8b91a0;
+}
+
+.aura-reset {
+  background: #fff0f0;
+  color: #ee525e;
+  border: 1px solid #ffd0d2;
+  padding: 9px 13px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.aura-reset:active {
+  background: #ffdce0;
+}
+
+.aura-detail-card {
+  background: #f7f8fc;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.aura-detail-card > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.aura-detail-card > div + div {
+  border-top: 1px solid #e9ebf1;
+}
+
+.aura-detail-card b {
+  color: #f45b65;
+  text-align: right;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.aura-detail-card .remaining-balance {
+  font-weight: 800;
+}
+
+.aura-detail-card .remaining-balance b {
+  color: #18a965;
+}
+
+.aura-detail-card .remaining-balance b.insufficient {
+  color: #ee4656;
+}
+
+.aura-insufficient {
+  color: #e74b55;
+  background: #fff0f0;
+  border: 1px solid #ffd4d7;
+  padding: 11px;
+  border-radius: 9px;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.aura-insufficient.hidden {
+  display: none !important;
+}
+
+.aura-quantity-heading {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.quantity {
+  margin-top: 10px;
+}
+
+.quantity strong {
+  min-width: 22px;
+  text-align: center;
+}
+
+.confirm-btn {
+  margin-top: 8px;
+}
+
+@media (max-width: 390px) {
+  .amount-options {
+    gap: 6px !important;
+  }
+
+  .amount-options button {
+    font-size: 11px !important;
+    min-height: 61px;
+  }
+
+  .aura-detail-card {
+    padding: 12px;
+  }
+
+  .aura-detail-card > div {
+    font-size: 12px;
+  }
+
+  .aura-detail-card b {
+    font-size: 12px;
+  }
+
+  .aura-balance-value {
+    font-size: 21px;
+  }
+}
+</style>
+
+<style id="aura-all-in-style">
+.amount-options .all-in-button {
+  background: #fff0e4 !important;
+  color: #b85b13 !important;
+  font-weight: 800 !important;
+}
+
+.amount-options .all-in-button.active {
+  background: #fa5d61 !important;
+  color: white !important;
+}
+</style>
+</head>
+
+<script src="/theme.js"></script><body>
+
+<header class="topbar">
+  <div class="brand">✦ AURA <b>LUCK</b></div>
+
+  <div class="wallet">
+    <small>Ví Đồng AURA</small>
+    <strong id="balance">100.000 Đồng AURA</strong>
+  </div>
+</header>
+
+<main class="app">
+
+  <!-- CHẾ ĐỘ CHƠI -->
+
+  <section class="period-tabs">
+    <div class="period active">
+      <span>◷</span>
+      WinGo<br>1Min
+    </div>
+
+    <div class="period inactive">
+      <span>◷</span>
+      WinGo<br>3Min
+    </div>
+
+    <div class="period inactive">
+      <span>◷</span>
+      WinGo<br>5Min
+    </div>
+  </section>
+
+  <!-- KỲ XỔ -->
+
+  <section class="draw-panel">
+
+    <div class="draw-left">
+      <button id="rulesButton" class="rules-btn">
+        ▤ Cách chơi
+      </button>
+
+      <p>WinGo 1Min</p>
+
+      <div class="draw-balls" id="drawBalls">
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+      </div>
+    </div>
+
+    <div class="draw-right">
+      <b>Thời gian còn lại</b>
+
+      <div class="clock" id="clock">00:60</div>
+
+      <strong id="roundId">---</strong>
+
+      
+    </div>
+
+  </section>
+
+  <!-- KHU VỰC DỰ ĐOÁN -->
+
+  <section class="game-panel" id="gamePanel">
+
+    <div class="color-buttons">
+      <button class="color-btn green" data-choice="green">
+        Xanh
+      </button>
+
+      <button class="color-btn purple" data-choice="purple">
+        Tím
+      </button>
+
+      <button class="color-btn red" data-choice="red">
+        Đỏ
+      </button>
+    </div>
+
+    <div class="number-grid" id="numberGrid"></div>
+
+    <div class="multipliers">
+      <button id="randomButton" class="random-btn">
+        Ngẫu nhiên
+      </button>
+
+      <button class="multi active" data-multi="1">X1</button>
+      <button class="multi" data-multi="5">X5</button>
+      <button class="multi" data-multi="10">X10</button>
+      <button class="multi" data-multi="20">X20</button>
+      <button class="multi" data-multi="50">X50</button>
+      <button class="multi" data-multi="100">X100</button>
+    </div>
+
+    <div class="size-buttons">
+      <button class="big" data-choice="big">Lớn</button>
+      <button class="small-btn" data-choice="small">Nhỏ</button>
+    </div>
+
+    <p class="game-hint" id="gameHint">
+      Chọn một phương án để dự đoán bằng Đồng AURA.
+    </p>
+
+  </section>
+
+  <!-- LỊCH SỬ -->
+
+  <section class="history-section">
+
+    <div class="history-tabs">
+      <button class="history-tab active" data-tab="history">
+        Lịch sử trò chơi
+      </button>
+
+      <button class="history-tab" data-tab="chart">
+        Biểu đồ
+      </button>
+
+      <button class="history-tab" data-tab="mine">
+        Lịch sử của tôi
+      </button>
+    </div>
+
+    <div id="historyPanel" class="history-panel">
+
+      <div class="table-scroll">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Kỳ xổ</th>
+              <th>Con số</th>
+              <th>Lớn nhỏ</th>
+              <th>Màu sắc</th>
+            </tr>
+          </thead>
+
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+      <nav class="aura-history-pages" aria-label="Chuyển trang lịch sử">
+        <button type="button" id="historyPrev">‹ Trước</button>
+        <span id="historyPageInfo">Trang 1 / 1</span>
+        <button type="button" id="historyNext">Tiếp ›</button>
+      </nav>
+    </div>
+
+    <!-- BIỂU ĐỒ -->
+
+    <div id="chartPanel" class="history-panel hidden">
+
+      <div class="chart-heading">
+        <h3>Biểu đồ thống kê</h3>
+        <span>100 kỳ gần nhất</span>
+      </div>
+
+      <div class="chart-scroll">
+        <div class="chart-inner">
+
+          <div class="chart-table-header">
+            <div>Kỳ xổ</div>
+            <div>Con số</div>
+          </div>
+
+          <div class="chart-statistics">
+
+            <div class="stat-row">
+              <span>Số mở thưởng</span>
+              <div class="stat-numbers" id="statNumbers"></div>
+            </div>
+
+            <div class="stat-row">
+              <span>Số kỳ chưa xổ</span>
+              <div class="stat-numbers" id="statMissing"></div>
+            </div>
+
+            <div class="stat-row">
+              <span>Bình quân số kỳ</span>
+              <div class="stat-numbers" id="statAverage"></div>
+            </div>
+
+            <div class="stat-row">
+              <span>Tần số xuất hiện</span>
+              <div class="stat-numbers" id="statFrequency"></div>
+            </div>
+
+            <div class="stat-row">
+              <span>Số kỳ liên tiếp tối đa</span>
+              <div class="stat-numbers" id="statConsecutive"></div>
+            </div>
+
+          </div>
+
+          <div class="trend-chart" id="trendChart">
+            <svg
+              id="trendLines"
+              xmlns="http://www.w3.org/2000/svg">
+            </svg>
+
+            <div id="trendRows"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <p class="chart-note">
+        Đường đỏ nối các số cuối của những kỳ đã mở thưởng.
+        B = Lớn, S = Nhỏ.
+      </p>
+
+    </div>
+
+    <!-- LỊCH SỬ CÁ NHÂN -->
+
+    <div id="minePanel" class="history-panel hidden">
+      <h3>Lịch sử dự đoán của tôi</h3>
+      <div id="myHistory"></div>
+    </div>
+
+  </section>
+
+  <!-- THỐNG KÊ -->
+
+  <section class="info-panel">
+
+    <h3>🏆 Thống kê tài khoản</h3>
+
+    <div class="stats">
+
+      <div>
+        Đã dự đoán
+        <b id="totalBets">0</b>
+      </div>
+
+      <div>
+        Đã thắng
+        <b id="totalWins">0</b>
+      </div>
+
+      <div>
+        Tỷ lệ thắng
+        <b id="winRate">0%</b>
+      </div>
+
+    </div>
+
+    <button id="resetButton" class="reset-btn">
+      Đặt lại dữ liệu demo
+    </button>
+
+  </section>
+
+</main>
+
+<!-- ĐẾM NGƯỢC 5 GIÂY CUỐI -->
+
+<div id="countdownOverlay" class="countdown-overlay hidden">
+
+  <div class="countdown-boxes">
+    <div class="countdown-digit" id="countDigit1">0</div>
+    <div class="countdown-digit" id="countDigit2">5</div>
+  </div>
+
+  <div class="countdown-message">
+    SẮP MỞ THƯỞNG
+  </div>
+
+</div>
+
+<!-- ======================================
+     CỬA SỔ ĐẶT CƯỢC AURA MỚI
+====================================== -->
+
+<div id="betModal" class="modal hidden">
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h2>AURA LUCK</h2>
+
+      <button id="closeModal" class="close-btn">
+        ✕
+      </button>
+    </div>
+
+    <div class="modal-content">
+
+      <h3 id="modalChoice">Dự đoán</h3>
+
+      <p>
+        Kỳ xổ:
+        <b id="modalRound"></b>
+      </p>
+
+      <!-- SỐ DƯ -->
+
+      <div class="aura-balance-card">
+
+        <div class="aura-balance-label">
+          <img
+            src="aura.png"
+            class="aura-coin"
+            alt="AURA">
+
+          Số dư khả dụng
+        </div>
+
+        <div class="aura-balance-value">
+
+          <span id="modalBalance">0</span>
+
+          <img
+            src="aura.png"
+            class="aura-coin large"
+            alt="AURA">
+
+        </div>
+
+        <div class="aura-balance-note">
+          Đồng AURA trong ví của bạn
+        </div>
+
+      </div>
+
+      <!-- MỆNH GIÁ CỘNG DỒN -->
+
+      <label class="aura-level-title">
+        Chọn mức cược
+      </label>
+
+      
+<div class="amount-options">
+  
+  <button type="button" data-amount="1000">
+    <span>1.000</span>
+    <img src="aura.png" class="aura-coin" alt="AURA">
+  </button>
+
+  <button type="button" data-amount="10000">
+    <span>10.000</span>
+    <img src="aura.png" class="aura-coin" alt="AURA">
+  </button>
+
+  <button type="button" data-amount="50000">
+    <span>50.000</span>
+    <img src="aura.png" class="aura-coin" alt="AURA">
+  </button>
+
+  <button type="button" data-amount="100000">
+    <span>100.000</span>
+    <img src="aura.png" class="aura-coin" alt="AURA">
+  </button>
+
+  <button type="button" data-amount="500000">
+    <span>500.000</span>
+    <img src="aura.png" class="aura-coin" alt="AURA">
+  </button>
+
+
+  <button type="button" data-amount="all" class="all-in-button">
+    <span>🔥 TẤT TAY</span>
+    <img src="aura.png" class="aura-coin" alt="AURA">
+  </button>
+</div>
+
+      <!-- TỔNG TIỀN -->
+
+      <div class="aura-amount-control">
+
+        <label>
+          Tổng mức cược đã chọn
+        </label>
+
+        <div class="aura-input-row">
+
+          <input
+            id="betAmount"
+            type="number"
+            min="0"
+            max="100000000"
+            step="1"
+            value="0">
+
+          <div class="aura-input-unit">
+            <img
+              src="aura.png"
+              class="aura-coin"
+              alt="AURA">
+            AURA
+          </div>
+
+        </div>
+
+        <div class="aura-actions">
+
+          <span>
+            Nhấn các mức cược để cộng dồn
+          </span>
+
+          <button
+            type="button"
+            id="clearAmount"
+            class="aura-reset">
+            ↺ Đặt lại
+          </button>
+
+        </div>
+
+      </div>
+      <!-- XÁC NHẬN NGAY SAU MỨC CƯỢC -->
+      <button id="confirmBet" class="confirm-btn aura-confirm-early">Xác nhận dự đoán</button>
+
+      <!-- CHI TIẾT -->
+
+      <div class="aura-detail-card">
+
+        <div>
+          <span>Tổng dự đoán</span>
+          <b id="grossAmount">0 Đồng AURA</b>
+        </div>
+
+        <div>
+          <span>Phí 2%</span>
+          <b id="feeAmount">0 Đồng AURA</b>
+        </div>
+
+        <div>
+          <span>Giá trị thực đặt</span>
+          <b id="netAmount">0 Đồng AURA</b>
+        </div>
+
+        <div>
+          <span>Thưởng dự kiến</span>
+          <b id="rewardAmount">0 Đồng AURA</b>
+        </div>
+
+        <div class="remaining-balance">
+          <span>Số dư sau khi đặt</span>
+          <b id="remainingBalance">0 Đồng AURA</b>
+        </div>
+
+      </div>
+
+      <div id="insufficientWarning" class="aura-insufficient hidden">
+        ⚠️ Số dư Đồng AURA không đủ để thực hiện dự đoán.
+      </div>
+
+      <p class="warning">
+        Không được dự đoán đồng thời Lớn và Nhỏ
+        trong cùng kỳ. Đồng AURA chỉ dùng để giải trí.
+      </p>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- LUẬT CHƠI -->
+
+<div id="rulesModal" class="modal hidden">
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h2>📖 Cách chơi</h2>
+
+      <button id="closeRules" class="close-btn">
+        ✕
+      </button>
+    </div>
+
+    <div class="modal-content rules-text">
+
+      <p>
+        Mỗi kỳ kéo dài 1, 3 hoặc 5 phút tùy chế độ.
+        Kết quả gồm 5 chữ số.
+        Xét thưởng theo chữ số cuối cùng.
+      </p>
+
+      <p>
+        Phí mỗi lượt là 2%.
+        Đặt 100 Đồng AURA thì giá trị thực đặt
+        là 98 Đồng AURA.
+      </p>
+
+      <p>
+        <b>Xanh:</b>
+        1, 3, 7, 9 nhận x2;
+        số 5 nhận x1.5.
+      </p>
+
+      <p>
+        <b>Đỏ:</b>
+        2, 4, 6, 8 nhận x2;
+        số 0 nhận x1.5.
+      </p>
+
+      <p>
+        <b>Tím:</b>
+        0 hoặc 5 nhận x4.5.
+      </p>
+
+      <p>
+        <b>Chọn số:</b>
+        Trúng số cuối nhận x9.
+      </p>
+
+      <p>
+        <b>Lớn:</b>
+        5–9 nhận x2.
+      </p>
+
+      <p>
+        <b>Nhỏ:</b>
+        0–4 nhận x2.
+      </p>
+
+      <p>
+        Không được chọn đồng thời Lớn và Nhỏ
+        trong cùng kỳ.
+      </p>
+
+      <p>
+        5 giây cuối khóa dự đoán và phát âm thanh
+        đếm ngược khi trình duyệt cho phép phát âm thanh.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div
+  id="toast"
+  class="toast"
+  role="status"
+  aria-live="polite">
+</div>
+
+<footer>
+  ✦ AURA LUCK ✦<br>
+  Trò chơi mô phỏng bằng Đồng AURA ảo
+</footer>
+
+
+<script src="/countdown-frame.js"></script><script src="/theme.js"></script></body>
+</html>

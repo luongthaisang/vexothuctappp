@@ -1,0 +1,1184 @@
+﻿
+:root {
+  --red: #fa5d61;
+  --green: #18b86c;
+  --purple: #c665ee;
+  --bg: #f4f6ff;
+  --text: #34394b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.topbar {
+  background: linear-gradient(120deg, #fb5259, #ff9990);
+  padding: 20px max(15px, calc((100% - 580px) / 2));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  gap: 10px;
+}
+
+.brand {
+  font-size: 25px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.brand b {
+  color: #fff1b8;
+}
+
+.wallet {
+  text-align: right;
+  font-size: 13px;
+}
+
+.wallet small {
+  display: block;
+  opacity: .9;
+}
+
+.wallet strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 15px;
+}
+
+.app {
+  max-width: 590px;
+  margin: auto;
+  padding: 14px 14px 30px;
+}
+
+.period-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: white;
+  border-radius: 17px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.period {
+  text-align: center;
+  padding: 15px 5px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.period span {
+  display: block;
+  font-size: 35px;
+}
+
+.period.active {
+  background: linear-gradient(#fa5a61, #ff9c91);
+  color: white;
+  border-radius: 16px;
+}
+
+.period.inactive {
+  opacity: .65;
+}
+
+.draw-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(135deg, #ff8586, #f84e57);
+  color: white;
+  border-radius: 15px;
+  padding: 18px 14px;
+  box-shadow: 0 5px 14px #ed6b7650;
+  gap: 10px;
+  margin-bottom: 22px;
+  min-height: 150px;
+}
+
+.draw-left {
+  border-right: 1px dashed #ffd6d6;
+  padding-right: 10px;
+}
+
+.rules-btn {
+  border: 1px solid #fff9;
+  color: white;
+  background: transparent;
+  border-radius: 30px;
+  padding: 8px 15px;
+  width: 100%;
+}
+
+.draw-left p {
+  margin: 12px 0;
+}
+
+.draw-balls {
+  display: flex;
+  gap: 3px;
+}
+
+.draw-balls span {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 25% 20%,
+    white,
+    #ffddd9 30%,
+    #ed5961 80%
+  );
+  display: grid;
+  place-items: center;
+  color: #ba3246;
+  font-weight: 900;
+  border: 2px solid #fff9;
+}
+
+.draw-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.draw-right > b {
+  font-size: 14px;
+}
+
+.clock {
+  font-size: 35px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin: 8px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.draw-right strong {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.sound-btn {
+  margin-top: 12px;
+  background: #ffffff35;
+  color: white;
+  border: 1px solid #ffffff80;
+  border-radius: 20px;
+  padding: 7px 11px;
+  font-size: 11px;
+}
+
+.game-panel, .history-panel, .info-panel {
+  background: white;
+  border-radius: 15px;
+  padding: 13px;
+  margin-bottom: 20px;
+}
+
+.color-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.color-btn {
+  padding: 17px 5px;
+  color: white;
+  font-size: 19px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.green { background: var(--green); }
+.red { background: var(--red); }
+.purple { background: var(--purple); }
+
+.number-grid {
+  background: #f6f7ff;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  padding: 16px 10px;
+  margin: 20px 0;
+}
+
+.number-ball {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  font-size: clamp(22px, 6vw, 35px);
+  font-weight: 900;
+  border: 5px dashed #ffffffb8;
+  box-shadow: 0 3px 8px #0002;
+  color: white;
+  text-shadow: 0 2px 2px #0003;
+}
+
+.number-ball.green {
+  background: radial-gradient(
+    circle at 30% 20%, #9bfbd0, #17b56b 65%, #067944
+  );
+}
+
+.number-ball.red {
+  background: radial-gradient(
+    circle at 30% 20%, #ffb7b9, #f34c5c 65%, #c91c3a
+  );
+}
+
+.number-ball.purple {
+  background: linear-gradient(
+    135deg, #f04b5c 48%, #bc60f1 52%
+  );
+}
+
+.multipliers {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.multipliers button {
+  flex: 1;
+  min-width: 39px;
+  border-radius: 9px;
+  padding: 12px 5px;
+  background: #f4f5fb;
+  color: #697083;
+}
+
+.multipliers .random-btn {
+  flex: 1.7;
+  min-width: 95px;
+  border: 1px solid var(--red);
+  color: var(--red);
+  background: white;
+}
+
+.multipliers .multi.active {
+  background: var(--green);
+  color: white;
+}
+
+.size-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 15px 8px 0;
+}
+
+.size-buttons button {
+  padding: 18px 5px;
+  color: white;
+  font-size: 20px;
+}
+
+.big {
+  background: #ffad52;
+  border-radius: 30px 0 0 30px;
+}
+
+.small-btn {
+  background: #70a7f3;
+  border-radius: 0 30px 30px 0;
+}
+
+.game-hint {
+  text-align: center;
+  color: #9299a9;
+  font-size: 12px;
+}
+
+.history-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.history-tab {
+  background: white;
+  border-radius: 12px;
+  padding: 14px 5px;
+  color: #777f90;
+  font-size: 14px;
+}
+
+.history-tab.active {
+  background: linear-gradient(120deg, #fb505a, #ff9291);
+  color: white;
+  font-weight: bold;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  min-width: 420px;
+}
+
+.history-table thead {
+  background: var(--red);
+  color: white;
+}
+
+.history-table th {
+  padding: 17px 5px;
+  font-size: 14px;
+}
+
+.history-table td {
+  padding: 13px 5px;
+  border-bottom: 1px solid #edf0f5;
+  font-size: 12px;
+}
+
+.result-digit {
+  font-size: 26px !important;
+  font-weight: 900;
+}
+
+.text-red { color: var(--red); }
+.text-green { color: var(--green); }
+.text-purple { color: var(--purple); }
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 0 2px;
+}
+
+.dot.green { background: var(--green); }
+.dot.red { background: var(--red); }
+.dot.purple { background: var(--purple); }
+
+/* ================================
+   BIỂU ĐỒ GIỐNG ẢNH THAM KHẢO
+================================ */
+
+.chart-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0 15px;
+}
+
+.chart-heading h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.chart-heading span {
+  color: #999;
+  font-size: 12px;
+}
+
+.chart-scroll {
+  overflow-x: auto;
+  border: 1px solid #edf0f5;
+  border-radius: 10px;
+}
+
+.chart-inner {
+  min-width: 520px;
+  background: white;
+}
+
+.chart-table-header {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  background: var(--red);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 18px 0;
+}
+
+.chart-statistics {
+  padding: 13px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  align-items: center;
+  min-height: 37px;
+}
+
+.stat-row > span {
+  padding-left: 9px;
+  font-size: 12px;
+  color: #535967;
+}
+
+.stat-numbers {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  text-align: center;
+  align-items: center;
+  color: #9fa5b1;
+  font-size: 12px;
+}
+
+.stat-number {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+}
+
+.stat-number.circle {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #f3b6bc;
+  color: var(--red);
+  border-radius: 50%;
+  justify-self: center;
+}
+
+.trend-chart {
+  position: relative;
+  overflow: hidden;
+}
+
+#trendLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.trend-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  height: 57px;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.trend-period {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #414754;
+}
+
+.trend-number-area {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  align-items: center;
+  position: relative;
+}
+
+.trend-number {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #e2e4e9;
+  color: #c4c7d0;
+  border-radius: 50%;
+  justify-self: center;
+  font-size: 12px;
+}
+
+.trend-number.hit {
+  color: white;
+  border: 0;
+  font-weight: 900;
+  position: relative;
+  z-index: 2;
+}
+
+.trend-number.hit.green {
+  background: var(--green);
+}
+
+.trend-number.hit.red {
+  background: var(--red);
+}
+
+.trend-number.hit.purple {
+  background: linear-gradient(
+    135deg, #f25360 48%, #c665ee 52%
+  );
+}
+
+.trend-size {
+  position: absolute;
+  right: 3px;
+  top: 17px;
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  transform: translateX(28px);
+}
+
+.trend-size.big { background: #ffad52; }
+.trend-size.small { background: #70a7f3; }
+
+.chart-note {
+  color: #9499a7;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 15px 0 5px;
+}
+
+/* ================================
+   ĐẾM NGƯỢC 5 GIÂY CUỐI
+================================ */
+
+.countdown-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0,0,0,.66);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.countdown-boxes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(15px, 5vw, 45px);
+  width: 100%;
+}
+
+.countdown-digit {
+  width: clamp(125px, 33vw, 190px);
+  height: clamp(190px, 46vw, 270px);
+  background: #f7f7f7;
+  color: #fa5d61;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  font-size: clamp(130px, 33vw, 220px);
+  font-weight: 400;
+  font-family: Arial, sans-serif;
+  line-height: 1;
+  box-shadow: 0 8px 30px #0003;
+}
+
+.countdown-digit.tick {
+  animation: countdownPulse .25s ease;
+}
+
+@keyframes countdownPulse {
+  0% { transform: scale(.93); }
+  70% { transform: scale(1.035); }
+  100% { transform: scale(1); }
+}
+
+.countdown-message {
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+  margin-top: 25px;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 8px #0009;
+}
+
+/* ================================
+   MODAL DỰ ĐOÁN
+================================ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: #0009;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-card {
+  background: white;
+  width: 100%;
+  max-width: 590px;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  background: linear-gradient(110deg, #fa525d, #ff9b93);
+  padding: 18px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.close-btn {
+  background: transparent;
+  color: white;
+  font-size: 25px;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-content h3 {
+  margin: 0 0 12px;
+}
+
+.modal-content label {
+  display: block;
+  margin: 17px 0 9px;
+}
+
+.amount-options {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 7px;
+}
+
+.amount-options button {
+  background: #f3f4fa;
+  padding: 12px 3px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.amount-options button.active {
+  background: var(--red);
+  color: white;
+}
+
+#betAmount {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  margin-top: 12px;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.quantity button {
+  background: #f1f2f8;
+  border-radius: 8px;
+  padding: 8px 17px;
+  font-size: 22px;
+}
+
+.bet-details {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f7f8fc;
+  border-radius: 10px;
+}
+
+.bet-details div {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  gap: 12px;
+}
+
+.bet-details b {
+  color: var(--red);
+  text-align: right;
+}
+
+.warning {
+  color: #a66b23;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.confirm-btn {
+  background: var(--red);
+  color: white;
+  border-radius: 10px;
+  width: 100%;
+  padding: 16px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.rules-text {
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* ================================
+   THỐNG KÊ VÀ LỊCH SỬ CÁ NHÂN
+================================ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+}
+
+.stats div {
+  text-align: center;
+  background: #f6f7ff;
+  padding: 15px 5px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.stats b {
+  display: block;
+  font-size: 20px;
+  margin-top: 9px;
+  color: var(--red);
+}
+
+.reset-btn {
+  margin-top: 17px;
+  background: #fff0f0;
+  color: #e94c59;
+  border: 1px solid #ffb4b8;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.my-bet {
+  border-bottom: 1px solid #eee;
+  padding: 13px 4px;
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.my-bet .won { color: var(--green); }
+.my-bet .lost { color: var(--red); }
+
+.toast {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90%;
+  padding: 14px 20px;
+  background: #303342;
+  color: white;
+  border-radius: 12px;
+  z-index: 100;
+  box-shadow: 0 6px 25px #0005;
+  text-align: center;
+}
+
+.toast.show { display: block; }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #9399a9;
+  font-size: 12px;
+  line-height: 2;
+}
+
+@media(max-width:390px) {
+  .app { padding: 10px; }
+  .number-grid { gap: 6px; padding: 12px 6px; }
+  .number-ball { border-width: 3px; }
+  .draw-panel { padding: 13px 9px; }
+  .clock { font-size: 29px; }
+  .draw-balls span { width: 24px; height: 24px; }
+  .history-tab { font-size: 12px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .countdown-digit.tick { animation: none; }
+}
+
+/* AURA LUCK: xác nhận thay vị trí số lượng và phân trang */
+.aura-confirm-early{display:block;width:100%;margin:18px 0 2px;padding:15px 12px;border-radius:12px;background:#fa5d61;color:white;font-weight:800;font-size:16px;box-shadow:0 4px 10px #fa5d6125}
+.aura-confirm-early:disabled{opacity:.5}
+.aura-history-pages{display:flex;justify-content:center;align-items:center;gap:12px;padding:16px 6px 4px}
+.aura-history-pages button{background:#fa5d61;color:#fff;border-radius:9px;padding:10px 13px;font-size:13px;font-weight:700}
+.aura-history-pages button:disabled{background:#eceef4;color:#9da3b1;opacity:1}
+.aura-history-pages span{font-size:13px;font-weight:700;white-space:nowrap;color:#43495a}
+
+/* =====================================
+   AURA LUCK - THU GỌN GIAO DIỆN
+===================================== */
+
+/* Thu nhỏ toàn bộ khung WinGo */
+.period-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin-bottom: 16px !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+}
+
+/* Thu nhỏ 3 ô WinGo */
+.period-tabs .period {
+    min-height: 85px !important;
+    height: 85px !important;
+    padding: 10px 5px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 14px !important;
+}
+
+/* Thu nhỏ biểu tượng đồng hồ */
+.period-tabs .period svg,
+.period-tabs .period i {
+    width: 23px !important;
+    height: 23px !important;
+    font-size: 23px !important;
+}
+
+/* Thu nhỏ chữ WinGo */
+.period-tabs .period span,
+.period-tabs .period p {
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+}
+
+/* Ẩn đổi mật khẩu và đăng xuất */
+#changePassword,
+#logoutButton {
+    display: none !important;
+}
+
+/* Giữ tên tài khoản */
+.aura-account-bar {
+    padding: 10px 14px !important;
+    min-height: 40px !important;
+}
+
+/* Điện thoại */
+@media (max-width: 600px) {
+    .period-tabs .period {
+        height: 75px !important;
+        min-height: 75px !important;
+        padding: 7px 3px !important;
+    }
+
+    .period-tabs .period span,
+    .period-tabs .period p {
+        font-size: 12px !important;
+    }
+}
+
+
+/* AURA_3D_BALLS_START */
+
+/* ==========================================
+   AURA LUCK - BONG SO 3D CAO CAP
+========================================== */
+
+.number-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    padding: 16px 10px !important;
+    background: linear-gradient(
+        145deg,
+        #f8f9ff,
+        #eef1ff
+    ) !important;
+    border-radius: 18px !important;
+}
+
+/* Khung bóng */
+.number-grid .number-ball {
+    --ball-color: #f05260;
+    --ball-light: #ffc0c6;
+    --ball-dark: #b72142;
+
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border: 0 !important;
+    border-radius: 50% !important;
+
+    color: var(--ball-color) !important;
+    font-size: clamp(22px, 5vw, 35px) !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+
+    background:
+        radial-gradient(
+            circle at 34% 25%,
+            #ffffff 0%,
+            #ffffff 10%,
+            var(--ball-light) 27%,
+            var(--ball-color) 59%,
+            var(--ball-dark) 100%
+        ) !important;
+
+    box-shadow:
+        inset -5px -6px 10px #0003,
+        inset 4px 5px 9px #ffffffc9,
+        0 5px 8px #0002,
+        0 1px 2px #ffffff !important;
+
+    text-shadow:
+        0 1px 1px #ffffff,
+        0 2px 3px #ffffffb0 !important;
+
+    isolation: isolate;
+    cursor: pointer;
+
+    transition:
+        transform .18s ease,
+        filter .18s ease,
+        box-shadow .18s ease;
+}
+
+/* Vòng trang trí bên ngoài */
+.number-grid .number-ball::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    z-index: -1;
+
+    border: 5px solid #ffffff9c;
+
+    background:
+        conic-gradient(
+            from 15deg,
+            transparent 0deg 28deg,
+            #ffffffbd 29deg 48deg,
+            transparent 49deg 98deg,
+            #ffffffc9 99deg 121deg,
+            transparent 122deg 188deg,
+            #ffffffb5 189deg 211deg,
+            transparent 212deg 285deg,
+            #ffffffd4 286deg 310deg,
+            transparent 311deg
+        );
+
+    box-shadow:
+        inset 0 0 4px #ffffff,
+        0 0 2px #ffffff;
+}
+
+/* Mặt kính sáng ở giữa */
+.number-grid .number-ball::after {
+    content: "";
+    position: absolute;
+    inset: 19%;
+    border-radius: 50%;
+    z-index: -1;
+
+    background:
+        radial-gradient(
+            circle at 36% 24%,
+            #ffffff 0%,
+            #ffffffec 26%,
+            #ffffffba 60%,
+            #ffffff5c 100%
+        );
+
+    box-shadow:
+        inset 0 2px 6px #ffffff,
+        0 2px 5px #0002;
+}
+
+/* Màu xanh */
+.number-grid .number-ball.green {
+    --ball-color: #12b86f;
+    --ball-light: #a4f8cf;
+    --ball-dark: #087448;
+}
+
+/* Màu đỏ */
+.number-grid .number-ball.red {
+    --ball-color: #ef4b59;
+    --ball-light: #ffbec5;
+    --ball-dark: #b51d36;
+}
+
+/* Màu tím */
+.number-grid .number-ball.purple {
+    --ball-color: #b955eb;
+    --ball-light: #edc5ff;
+    --ball-dark: #7930b7;
+}
+
+/* Hiệu ứng khi rê chuột */
+.number-grid .number-ball:hover:not(:disabled) {
+    transform: translateY(-4px) scale(1.06);
+    filter: brightness(1.06);
+
+    box-shadow:
+        inset -5px -6px 10px #0003,
+        inset 4px 5px 9px #ffffffc9,
+        0 8px 16px #0003 !important;
+}
+
+/* Hiệu ứng khi nhấn */
+.number-grid .number-ball:active:not(:disabled) {
+    transform: scale(.92);
+}
+
+/* Bóng kết quả 5 số gần nhất */
+.draw-balls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex-wrap: nowrap !important;
+}
+
+.draw-balls span {
+    --ball-color: #f05260;
+    --ball-light: #ffc0c6;
+    --ball-dark: #b72142;
+
+    position: relative !important;
+    width: 29px !important;
+    height: 29px !important;
+    min-width: 0 !important;
+    flex: 0 1 29px;
+
+    display: grid !important;
+    place-items: center !important;
+
+    border: 2px solid #ffffffb8 !important;
+    border-radius: 50% !important;
+
+    background:
+        radial-gradient(
+            circle at 30% 20%,
+            white 0%,
+            var(--ball-light) 28%,
+            var(--ball-color) 65%,
+            var(--ball-dark) 100%
+        ) !important;
+
+    box-shadow:
+        inset 2px 2px 4px #ffffffa0,
+        inset -2px -3px 5px #0003,
+        0 2px 5px #0002 !important;
+
+    color: white !important;
+    font-size: 15px !important;
+    font-weight: 900 !important;
+    text-shadow: 0 1px 3px #0005 !important;
+}
+
+.draw-balls span.green {
+    --ball-color: #12b86f;
+    --ball-light: #a4f8cf;
+    --ball-dark: #087448;
+}
+
+.draw-balls span.red {
+    --ball-color: #ef4b59;
+    --ball-light: #ffbec5;
+    --ball-dark: #b51d36;
+}
+
+.draw-balls span.purple {
+    --ball-color: #b955eb;
+    --ball-light: #edc5ff;
+    --ball-dark: #7930b7;
+}
+
+/* Giữ nguyên bố cục trên điện thoại */
+@media (max-width: 390px) {
+    .number-grid {
+        gap: 6px !important;
+        padding: 12px 6px !important;
+    }
+
+    .number-grid .number-ball {
+        font-size: 25px !important;
+    }
+
+    .number-grid .number-ball::before {
+        border-width: 3px;
+    }
+
+    .draw-balls {
+        gap: 2px !important;
+    }
+
+    .draw-balls span {
+        width: 24px !important;
+        height: 24px !important;
+        flex-basis: 24px;
+        font-size: 12px !important;
+    }
+}
+
+/* AURA_3D_BALLS_END */
